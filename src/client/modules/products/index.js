@@ -17,9 +17,11 @@ const createStoreWithMiddleware = applyMiddleware(
 class UserModule extends Component {
   constructor(props) {
     super(props);
+
   }
 
   render() {
+    console.log("value of response is >> ",this.state.response)
     return (
       <Provider store={createStoreWithMiddleware(reducers)}>
         <BrowserRouter ><Main /></BrowserRouter >

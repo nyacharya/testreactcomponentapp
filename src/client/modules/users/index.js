@@ -17,9 +17,20 @@ const createStoreWithMiddleware = applyMiddleware(
 class UserModule extends Component {
   constructor(props) {
     super(props);
+    this.state ={
+      response: null,
+    }
   }
 
+  componentDidMount(){
+    fetch("http://localhost:5000/api/hello")
+      .then(response => response.json())
+      .then(data => this.setState({ response: data }));
+  }
+
+  
   render() {
+    console.log("value in response  >> ",this.state.response)
     return (
       <Provider store={createStoreWithMiddleware(reducers)}>
         <BrowserRouter ><Main /></BrowserRouter >

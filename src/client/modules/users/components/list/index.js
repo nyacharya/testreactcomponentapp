@@ -74,7 +74,7 @@ class ListUsers extends Component {
       text: "",
       formatter: this.editData,
     }, {
-      dataField: "id",
+      dataField: "",
       text: "",
       formatter: this.detailData,
     }, {
