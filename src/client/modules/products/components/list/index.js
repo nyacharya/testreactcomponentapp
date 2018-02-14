@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Fancy from 'react-fancy-component';
+// import Fancy from 'react-fancy-component';
 import {Link} from"react-router-dom";
 
 class ListProducts extends Component {
@@ -7,7 +7,7 @@ class ListProducts extends Component {
     return(
       <div>
         <Link to ="/"> Back to List users </Link>
-      <Fancy/>
+      {/*<Fancy/>*/}
       </div>
     )
   }

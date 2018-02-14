@@ -7,7 +7,7 @@ import { designation, technology, sex } from "../../../../constant";
 import BootstrapTable from "react-bootstrap-table-next";
 import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
 import paginationFactory from "react-bootstrap-table2-paginator";
-import Fancy from 'react-fancy-component';
+// import Fancy from 'react-fancy-component';
 
 
 class ListUsers extends Component {

@@ -1,3 +1,5 @@
+const mongoose  = require('mongoose');
+
 const {MongoClient,ObjectID}= require('mongodb')
 
 MongoClient.connect('mongodb://localhost:27017/test',(err,db)=>{
@@ -6,9 +8,11 @@ MongoClient.connect('mongodb://localhost:27017/test',(err,db)=>{
     }
     console.log('Connected to MongoDB server');
 
-    db.getCollection('Todos').find({});
+    // db.getCollection('Todos').find({});
     db.close();
 });
+
+
 
 
 // var MongoClient = require('mongodb').MongoClient;

@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import UserDetail from "../components/list";
 import ListUser from "../../users";
 import addUsers from "../../adduser";
-import Fancy from 'react-fancy-component';
+// import Fancy from 'react-fancy-component';
 
 const UserRouter = () => (
 

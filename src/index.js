@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter } from 'react-router-dom';
 import promise from 'redux-promise';
 import reducers from './reducers/'
-import Fancy from 'react-fancy-component';
+// import Fancy from 'react-fancy-component';
 
 
 const createStoreWithMiddleware = applyMiddleware(
