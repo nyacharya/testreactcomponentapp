@@ -3,12 +3,6 @@ const bodyParser = require('body-parser');
 
 const app = express();
 const port = process.env.PORT || 5000;
-const data = { body: 'Hello From Express', statusCode:200,
-headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "*",
-    "Access-Control-Allow-methods": "GET,HEAD,POST,OPTIONS,PUT"
-} }
 
 app.use(function(req, res, next) {
     console.log("runnig use")
@@ -23,10 +17,11 @@ const mongoose  = require('mongoose');
 var users = require('./model.js');
 var jsonParser =  bodyParser.json();
 var dbconnect = require('./dbconnection')
+
+//POST method 
 app.post('/api/insertData', jsonParser, function(req, res){
     dbconnect();
     var data = req.body
-    // res.send(req.body)
     console.log("inside post",data)
     
   var userData = new users({
@@ -34,11 +29,19 @@ app.post('/api/insertData', jsonParser, function(req, res){
     "designation" : data.designation,
     "technology" : data.technology
   });
+  userData.save(function(err, data) {
+    if(err) {
+      console.log("Error : ", err);
+    } else {
+      console.log("Success :" , data)
+    }
+  })
   console.log("userData : ", userData);
   res.send(userData)
 })
 
 
+//GET method
 app.get('/api/getData', (req, res) => {
     dbconnect();
   
@@ -52,6 +55,7 @@ app.get('/api/getData', (req, res) => {
   })
 });
 
+//GET method for detail
 app.get('/api/getDetail/:id',(req,res)=>{
     console.log("value of id >> ",req.params.id) 
     dbconnect();
@@ -66,5 +70,28 @@ app.get('/api/getDetail/:id',(req,res)=>{
         }
     })
 })
+
+//PUT method
+app.put('/api/update/:id',(req,res)=>{
+  console.log("value of id >> ",req) 
+  dbconnect();
+  var data = req.body
+  console.log("value in data >> ",data)
+  users.update({'_id': req.params.id},
+  {
+    "name": data.name,
+    "technology" : data.technology,
+    "designation": data.designation
+  }, function(err,data){
+      if(err){
+          console.log("Error : ",err)
+      }
+      else{
+          console.log("Data Detail : ",data)
+          res.send(data)
+      }
+  })
+})
+
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

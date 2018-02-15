@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React, { Component } from "react";
-import { postData, editData, postdatas } from "../../actions/postdata";
-import { getDetail } from "../../../userdetail/actions/getdetaildata";
+import { postData, editData, editDataApi, postdatas } from "../../actions/postdata";
+import { getDetail, getDetailApi } from "../../../userdetail/actions/getdetaildata";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { renderTextField, renderSelect, RadioSelectValueField } from "../form";
@@ -27,7 +27,7 @@ class AddUser extends Component {
         isedit: true,
       });
     }
-    this.props.getDetail(this.props.match.params.id);
+    this.props.getDetailApi(this.props.match.params.id);
   }
 
 
@@ -45,7 +45,14 @@ class AddUser extends Component {
       name: event.name,
       des: event.designation
     }
+    
+    if(this.state.isedit){
+      this.props.editDataApi(event,this.props.match.params.id)
+    }
+    else{
     this.props.postdatas(event);
+      
+    }
     // if (this.state.isedit) {
     //   this.props.editData(event);
     // }
@@ -55,7 +62,7 @@ class AddUser extends Component {
   }
 
   editData = (cell, row, rowIndex) => {
-    return (<Link to={`/edit-user/${row.id}`}> Edit </Link>);
+    return (<Link to={`/edit-user/${row._id}`}> Edit </Link>);
   }
 
   detailData = (cell, row, rowIndex) => {
@@ -147,7 +154,7 @@ function mapStateToProps(state, ownProps) {
     savedData: state.postdata,
     vallength: state.postdata ? state.postdata.postdata ? state.postdata.postdata.length : "" : "",
     loading: state.postdata.isLoading,
-    initialValues: state.getdetail ? state.getdetail.detaildata : "",
+    initialValues: state.getdetail.detaildata ? state.getdetail.detaildata[0] : "",
   };
 }
 
@@ -156,4 +163,4 @@ AddUser = reduxForm({
   // validate,
 })(AddUser);
 
-export default connect(mapStateToProps, { postData, getDetail, editData, postdatas })(AddUser);
+export default connect(mapStateToProps, { postData, editDataApi,getDetail,getDetailApi, editData, postdatas })(AddUser);

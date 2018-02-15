@@ -32,6 +32,28 @@ export function editData(prop) {
   };
 }
 
+export function editDataApi(data) {
+  console.log("value inside postdata ",data)
+
+    return function(dispatch){
+       fetch(`http://localhost:5000/api/update/${data._id}`,
+  {
+      method: "PUT",
+      headers: {
+        'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+        'Content-Type': 'application/json'
+        },
+      body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(function(res){
+    console.log("Respond... ",res)
+    dispatch(getSuccess(POSTDATA.POSTDATA_RESET));
+    dispatch(getSuccess(POSTDATA.POSTDATA_SUCCESS, res));
+  })
+}
+}
+
 export function postData(prop) {
   let temp = prop;
   prop = {
@@ -59,6 +81,17 @@ export function getDetail(id) {
     dispatch(getSuccess(GETDETAIL.GET_DATA_SUCCESS, aa));
   };
 };
+
+export function getDetailApi(id) {
+  return function(dispatch) {
+    fetch(`http://localhost:5000/api/getDetail/${id}`)
+    .then(response => response.json())
+    .then(data => dispatch(getSuccess(GETDETAIL.GET_DATA_SUCCESS, data)));
+    // dispatch(getSuccess(FETCHDATA.GET_DATA_RESET))
+  };
+  
+};
+
 
 
 // export function postdatas(data){

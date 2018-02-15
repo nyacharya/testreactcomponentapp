@@ -42,8 +42,4 @@ export function getDetailApi(id) {
     .then(data => dispatch(getSuccess(GETDETAIL.GET_DATA_SUCCESS, data)));
     // dispatch(getSuccess(FETCHDATA.GET_DATA_RESET))
   };
-  return function(dispatch) {
-    let aa = getsingledata(id);
-    dispatch(getSuccess(GETDETAIL.GET_DATA_SUCCESS, aa));
-  };
 };

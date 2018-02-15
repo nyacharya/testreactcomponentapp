@@ -37,7 +37,7 @@ componentDidMount(){
   }
 
   editData = (cell, row, rowIndex) => {
-    return (<Link to = {`/edit-user/${row.id}`}> Edit </Link>);
+    return (<Link to = {`/edit-user/${row._id}`}> Edit </Link>);
   }
 
   detailData = (cell, row, rowIndex) => {
