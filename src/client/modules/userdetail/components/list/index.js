@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getDetail } from "../../actions/getdetaildata";
+import { getDetail, getDetailApi } from "../../actions/getdetaildata";
 class UserDetail extends Component {
   constructor(props) {
     super(props);
@@ -11,13 +11,14 @@ class UserDetail extends Component {
   }
 
   componentWillMount() {
-    this.props.getDetail(this.props.match.params.id);
+    // this.props.getDetail(this.props.match.params.id);
+    this.props.getDetailApi(this.props.match.params.id)
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.detaildata) {
       this.setState({
-        details: nextProps.detaildata,
+        details: nextProps.detaildata[0],
       });
     }
   }
@@ -49,5 +50,5 @@ function mapStateToProps(state, ownProps) {
     datais: state.getdetail,
   };
 }
-export default connect(mapStateToProps, { getDetail })(UserDetail);
+export default connect(mapStateToProps, { getDetail,getDetailApi })(UserDetail);
 

@@ -1,6 +1,6 @@
 import _ from "lodash";
 import React, { Component } from "react";
-import { postData, editData } from "../../actions/postdata";
+import { postData, editData, postdatas } from "../../actions/postdata";
 import { getDetail } from "../../../userdetail/actions/getdetaildata";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
@@ -40,12 +40,18 @@ class AddUser extends Component {
   }
 
   onSubmit = (event) => {
-    if (this.state.isedit) {
-      this.props.editData(event);
+    console.log("value of event >> ",event)
+    let aa = {
+      name: event.name,
+      des: event.designation
     }
-    else {
-      this.props.postData(event);
-    }
+    this.props.postdatas(event);
+    // if (this.state.isedit) {
+    //   this.props.editData(event);
+    // }
+    // else {
+    //   this.props.postData(event);
+    // }
   }
 
   editData = (cell, row, rowIndex) => {
@@ -150,4 +156,4 @@ AddUser = reduxForm({
   // validate,
 })(AddUser);
 
-export default connect(mapStateToProps, { postData, getDetail, editData })(AddUser);
+export default connect(mapStateToProps, { postData, getDetail, editData, postdatas })(AddUser);

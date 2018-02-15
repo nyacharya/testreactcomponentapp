@@ -23,7 +23,9 @@ export function getReset(RESET) {
 }
 export function fetchData() {
   return function(dispatch) {
+    fetch("http://localhost:5000/api/getData")
+    .then(response => response.json())
+    .then(data => dispatch(getSuccess(FETCHDATA.GET_DATA_SUCCESS, data)));
     // dispatch(getSuccess(FETCHDATA.GET_DATA_RESET))
-    dispatch(getSuccess(FETCHDATA.GET_DATA_SUCCESS, data));
   };
 };

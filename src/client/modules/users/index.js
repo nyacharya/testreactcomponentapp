@@ -22,15 +22,15 @@ class UserModule extends Component {
     }
   }
 
-  componentDidMount(){
-    fetch("http://localhost:5000/api/hello")
-      .then(response => response.json())
-      .then(data => this.setState({ response: data }));
-  }
+  // componentDidMount(){
+  //   fetch("http://localhost:5000/api/getData")
+  //     .then(response => response.json())
+  //     .then(data => this.setState({ response: data }));
+  // }
 
   
   render() {
-    console.log("value in response  >> ",this.state.response)
+    // console.log("value in response  >> ",this.state.response)
     return (
       <Provider store={createStoreWithMiddleware(reducers)}>
         <BrowserRouter ><Main /></BrowserRouter >

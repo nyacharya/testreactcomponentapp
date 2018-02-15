@@ -34,3 +34,16 @@ export function getDetail(id) {
     dispatch(getSuccess(GETDETAIL.GET_DATA_SUCCESS, aa));
   };
 };
+
+export function getDetailApi(id) {
+  return function(dispatch) {
+    fetch(`http://localhost:5000/api/getDetail/${id}`)
+    .then(response => response.json())
+    .then(data => dispatch(getSuccess(GETDETAIL.GET_DATA_SUCCESS, data)));
+    // dispatch(getSuccess(FETCHDATA.GET_DATA_RESET))
+  };
+  return function(dispatch) {
+    let aa = getsingledata(id);
+    dispatch(getSuccess(GETDETAIL.GET_DATA_SUCCESS, aa));
+  };
+};

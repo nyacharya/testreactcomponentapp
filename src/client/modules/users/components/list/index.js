@@ -15,8 +15,15 @@ class ListUsers extends Component {
     super(props);
     this.state = {
       dataval: null,
+      response: null,
     };
   }
+
+componentDidMount(){
+  fetch("http://localhost:5000/api/getData")
+    .then(response => response.json())
+    .then(data => this.setState({ response: data }));
+}
 
   componentWillMount() {
     this.props.fetchData();
@@ -34,7 +41,7 @@ class ListUsers extends Component {
   }
 
   detailData = (cell, row, rowIndex) => {
-    return (<Link to = {`/user/${row.id}`}> Detail </Link>);
+    return (<Link to = {`/user/${row._id}`}> Detail </Link>);
   }
 
   getDesignation = (cell, row, rowIndex) => {
@@ -83,7 +90,7 @@ class ListUsers extends Component {
       formatter: this.gotoProduct,
     }];
     return (
-      <div>
+      <div>{console.log("value in respondse >> ",this.state.response)}
         <center> <h3> List of Users </h3> </center>
         {this.state.dataval ?
           <BootstrapTable keyField='id' pagination={paginationFactory()}
