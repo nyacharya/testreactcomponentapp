@@ -11,6 +11,15 @@ import BootstrapTable from "react-bootstrap-table-next";
 import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
 import paginationFactory from "react-bootstrap-table2-paginator";
 
+const scrollToInvalid = (errors) => {
+    if (errors) {
+        console.log("errorscroll..",errors)
+      const invalidInput = _.findKey(errors, key => key !== undefined);
+      window.scrollTo(0, window.pageYOffset +
+        (document.getElementsByName(invalidInput)[0].getBoundingClientRect().top - 100));
+    }
+ };
+
 class AddUser extends Component {
   constructor(props) {
     super(props);
@@ -148,6 +157,7 @@ function mapStateToProps(state, ownProps) {
 AddUser = reduxForm({
   form: "add_user",
   // validate,
+  onSubmitFail: errors => scrollToInvalid(errors),
 })(AddUser);
 
 export default connect(mapStateToProps, { postData, getDetail, editData })(AddUser);
